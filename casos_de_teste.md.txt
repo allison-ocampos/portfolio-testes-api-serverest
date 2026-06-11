@@ -1,0 +1,233 @@
+# Plano de Testes Manuais de API - ServeRest
+
+Este documento contém a especificação dos casos de teste manuais criados para validar os endpoints de Autenticação, Produtos e Carrinhos da API ServeRest através do Postman.
+
+---
+
+## TC 001 Autenticação com credenciais válidas
+
+* **Pré-requisitos:**
+  * Possuir usuário cadastrado no sistema e válido
+
+* **Dados de entrada:**
+  * **Método HTTP:** POST
+  * **Endpoint (URL):** https://serverest.dev/login
+  * **Email:** fulano@qa.com
+  * **Password:** teste
+
+* **Passos (Steps):**
+  1. Configurar o método para POST
+  2. Informar a URL do Endpoint de Login: https://serverest.dev/login
+  3. Clicar na aba "Body"
+  4. Selecionar a opção "RAW"
+  5. Alterar o Formato do Texto para JSON
+  6. Inserir o JSON com "email" e "password" válidos no campo
+  7. Clicar no botão "Send"
+
+* **Resultado esperado:**
+  * O código de status (Status Code) retornado deve ser `200 OK`.
+  * A resposta deve conter o campo "message" com o valor `"Login realizado com sucesso"`.
+
+---
+
+## TC 002 Autenticação com senha incorreta
+
+* **Pré-requisitos:**
+  * Possuir usuário cadastrado no sistema e válido
+
+* **Dados de entrada:**
+  * **Método HTTP:** POST
+  * **Endpoint (URL):** https://serverest.dev/login
+  * **Email:** fulano@qa.com
+  * **Password:** teste12345
+
+* **Passos (Steps):**
+  1. Configurar o método para POST
+  2. Informar a URL do Endpoint de Login: https://serverest.dev/login
+  3. Clicar na aba "Body"
+  4. Selecionar a opção "RAW"
+  5. Alterar o Formato do Texto para JSON
+  6. Inserir o JSON com "email" válido e "password" incorreta no campo
+  7. Clicar no botão "Send"
+
+* **Resultado esperado:**
+  * O código de status (Status Code) retornado deve ser `401 Unauthorized`.
+  * A resposta deve conter o campo "message" com o valor `"Email e/ou senha inválidos"`.
+
+---
+
+## TC 003 Tentativa de Autenticação com campos vazios [email]
+
+* **Dados de entrada:**
+  * **Método HTTP:** POST
+  * **Endpoint (URL):** https://serverest.dev/login
+  * **E-mail:** ""
+  * **Password:** teste
+
+* **Passos (Steps):**
+  1. Configurar o método para POST
+  2. Informar a URL do Endpoint de Login: https://serverest.dev/login
+  3. Clicar na aba "Body"
+  4. Selecionar a opção "RAW"
+  5. Alterar o Formato do Texto para JSON
+  6. Inserir o JSON com "email" vazio e "password" correta no campo
+  7. Clicar no botão "Send"
+
+* **Resultado esperado:**
+  * O sistema recusa o login.
+  * Retornar o Status Code `400 Bad Request` e exibir a mensagem: `"Email não pode estar em branco"`.
+
+---
+
+## TC 004 Tentativa de Autenticação com campos vazios [password]
+
+* **Dados de entrada:**
+  * **Método HTTP:** POST
+  * **Endpoint (URL):** https://serverest.dev/login
+  * **E-mail:** fulano@qa.com
+  * **Password:** ""
+
+* **Passos (Steps):**
+  1. Configurar o método para POST
+  2. Informar a URL do Endpoint de Login: https://serverest.dev/login
+  3. Clicar na aba "Body"
+  4. Selecionar a opção "RAW"
+  5. Alterar o Formato do Texto para JSON
+  6. Inserir o JSON com "email" válido e "password" vazio no campo
+  7. Clicar no botão "Send"
+
+* **Resultado esperado:**
+  * O sistema recusa o login.
+  * Retornar o Status Code `400 Bad Request` e exibir a mensagem: `"Password não pode estar em branco"`.
+
+---
+
+## TC 005 Testar cadastro de produtos no banco de dados
+
+* **Pré-requisitos:**
+  * Não é permitido cadastrar produto com nome já utilizado
+  * Para cadastrar produto precisa ter token de acesso válido
+
+* **Dados de entrada:**
+  * **Método HTTP:** POST
+  * **Endpoint (URL):** https://serverest.dev/produtos
+  * **Nome:** "Notebook Dell"
+  * **Preço:** "1200"
+  * **Descrição:** "Portátil"
+  * **Quantidade:** "150"
+
+* **Passos (Steps):**
+  1. Configurar o método para POST
+  2. Informar a URL do Endpoint de Produtos: https://serverest.dev/produtos
+  3. Clicar na aba "Body"
+  4. Selecionar a opção "RAW"
+  5. Alterar o Formato do Texto para JSON
+  6. Inserir o JSON com "nome, preco, descricao e quantidade" e seus atributos
+  7. Clicar na aba "Authorization"
+  8. Selecionar no menu "Auth Type" a opção "Bearer Token"
+  9. Preencher o campo "Token" com o token válido
+  10. Clicar em "Send"
+
+* **Resultado esperado:**
+  * Status Code `201 Created`.
+  * Mensagem exibida: `"Cadastro realizado com sucesso"`.
+
+---
+
+## TC 006 Tentativa de cadastrar produtos com nome já existentes
+
+* **Pré-requisitos:**
+  * Possuir o nome de produtos já cadastrados no sistema
+  * Para cadastrar produto precisa ter token de acesso válido
+
+* **Dados de entrada:**
+  * **Método HTTP:** POST
+  * **Endpoint (URL):** https://serverest.dev/produtos
+  * **Nome:** Logitech MX Vertical
+  * **Preço:** 470
+  * **Descrição:** Mouse
+  * **Quantidade:** 381
+
+* **Passos (Steps):**
+  1. Configurar o método para POST
+  2. Informar a URL do Endpoint de Produtos: https://serverest.dev/produtos
+  3. Clicar na aba "Body"
+  4. Selecionar a opção "RAW"
+  5. Alterar o Formato do Texto para JSON
+  6. Inserir o JSON com "nome, preco, descricao e quantidade" e seus atributos
+  7. Clicar na aba "Authorization"
+  8. Selecionar no menu "Auth Type" a opção "Bearer Token"
+  9. Preencher o campo "Token" com o token válido
+  10. Clicar em "Send"
+
+* **Resultado esperado:**
+  * Status Code `400 Bad Request`.
+  * Mensagem exibida: `"Já existe produto com esse nome"`.
+
+---
+
+## TC 007 Cadastrar carrinho de compra
+
+* **Pré-requisitos:**
+  * Precisa ser criado um usuário novo e válido
+  * O Usuário não pode ter carrinho ativo
+  * O produto deve estar cadastrado no sistema
+  * Deve possuir dados do produto como ID e quantidade
+  * Para cadastrar carrinho precisa ter token de acesso válido
+
+* **Dados de entrada:**
+  * **Método HTTP:** POST
+  * **Endpoint (URL):** https://serverest.dev/carrinhos
+  * **Lista de Produtos** contendo os atributos "idProduto" e "quantidade"
+  * **ID Produto:** K6leHdftCeOJj8BJ
+  * **Quantidade:** 1
+
+* **Passos (Steps):**
+  1. Configurar o método para POST
+  2. Informar a URL do Endpoint de Carrinhos: https://serverest.dev/carrinhos
+  3. Clicar na aba "Body"
+  4. Selecionar a opção "RAW"
+  5. Alterar o Formato do Texto para JSON
+  6. Inserir a lista de produtos JSON com "idProduto e quantidade"
+  7. Clicar na aba "Authorization"
+  8. Selecionar no menu "Auth Type" a opção "Bearer Token"
+  9. Preencher o campo "Token" com o token válido
+  10. Clicar em "Send"
+
+* **Resultado esperado:**
+  * Status Code `201 Created`.
+  * Mensagem exibida: `"Cadastro realizado com sucesso"`.
+
+---
+
+## TC 008 Tentativa de cadastro de carrinho com quantidade superior a existente em estoque
+
+* **Pré-requisitos:**
+  * Precisa ser criado um usuário novo e válido
+  * O Usuário não pode ter carrinho ativo
+  * O produto deve estar cadastrado no sistema
+  * Deve possuir dados do produto como ID e quantidade
+  * Para cadastrar carrinho precisa ter token de acesso válido
+
+* **Dados de entrada:**
+  * **Método HTTP:** POST
+  * **Endpoint (URL):** https://serverest.dev/carrinhos
+  * **Lista de Produtos** contendo os atributos "idProduto" e "quantidade"
+  * **ID Produto:** K6leHdftCeOJj8BJ
+  * **Quantidade:** 60000
+
+* **Passos (Steps):**
+  1. Configurar o método para POST
+  2. Informar a URL do Endpoint de Carrinhos: https://serverest.dev/carrinhos
+  3. Clicar na aba "Body"
+  4. Selecionar a opção "RAW"
+  5. Alterar o Formato do Texto para JSON
+  6. Inserir a lista de produtos JSON com "idProduto e quantidade"
+  7. Clicar na aba "Authorization"
+  8. Selecionar no menu "Auth Type" a opção "Bearer Token"
+  9. Preencher o campo "Token" com o token válido
+  10. Clicar em "Send"
+
+* **Resultado esperado:**
+  * Status Code `400 Bad Request`.
+  * Mensagem exibida: `"Produto não possui quantidade suficiente"`.
