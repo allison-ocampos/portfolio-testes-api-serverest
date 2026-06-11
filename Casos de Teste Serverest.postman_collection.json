@@ -1,0 +1,338 @@
+{
+  "info": {
+    "_postman_id": "5e9d3e76-2015-491c-9656-fc7c87b1bfaa",
+    "name": "Casos de Teste Serverest",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54803396",
+    "_collection_link": "https://go.postman.co/collection/54803396-5e9d3e76-2015-491c-9656-fc7c87b1bfaa?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "User Autentication",
+      "item": [
+        {
+          "name": "Autentication",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"fulano@qa.com\",\r\n  \"password\": \"teste\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://serverest.dev/login",
+              "protocol": "https",
+              "host": [
+                "serverest",
+                "dev"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "teste-password-incorreta",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"fulano@qa.com\",\r\n    \"password\": \"teste12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://serverest.dev/login",
+              "protocol": "https",
+              "host": [
+                "serverest",
+                "dev"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "teste-email-vazio",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"\",\r\n    \"password\": \"teste\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://serverest.dev/login",
+              "protocol": "https",
+              "host": [
+                "serverest",
+                "dev"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "teste-password-vazio",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"fulano@qa.com\",\r\n    \"password\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://serverest.dev/login",
+              "protocol": "https",
+              "host": [
+                "serverest",
+                "dev"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "criação de usuário novo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"Oliver Queen\",\r\n  \"email\": \"oliver@qa.com\",\r\n  \"password\": \"teste123\",\r\n  \"administrador\": \"true\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlBase}}/usuarios",
+              "host": [
+                "{{urlBase}}"
+              ],
+              "path": [
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "teste-cadastro-produto",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzgxMTkyMjM3LCJleHAiOjE3ODExOTI4Mzd9.1BKnqmytQ1ksR4pFg5zzvmsB_6qxEJ1kK6Dz0F9vx7A",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nome\":\"Notebook Dell\",\r\n    \"preco\":\"1200\",\r\n    \"descricao\":\"Portátil\",\r\n    \"quantidade\":\"150\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlBase}}/produtos",
+              "host": [
+                "{{urlBase}}"
+              ],
+              "path": [
+                "produtos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "teste-cadastro-nome-existente",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzgxMTkzMDc1LCJleHAiOjE3ODExOTM2NzV9.deoWdnI79bt5nOLxfCTHTW4A5nliJSwpTTgSRhqRoSI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nome\":\"Logitech MX Vertical\",\r\n    \"preco\":\"470\",\r\n    \"descricao\": \"Mouse\",\r\n    \"quantidade\": \"381\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlBase}}/produtos",
+              "host": [
+                "{{urlBase}}"
+              ],
+              "path": [
+                "produtos"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Carrinho de Compra",
+      "item": [
+        {
+          "name": "teste-cadastrar-carrinho",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9saXZlckBxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlMTIzIiwiaWF0IjoxNzgxMTk2NTE5LCJleHAiOjE3ODExOTcxMTl9.t5OhX6_B4_4QXjP2k4dSQXaiXCWojWciybWwe2gD_jE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"produtos\":[\r\n        {\r\n            \"idProduto\": \"K6leHdftCeOJj8BJ\",\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlBase}}/carrinhos",
+              "host": [
+                "{{urlBase}}"
+              ],
+              "path": [
+                "carrinhos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "teste-quantidade-superior",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AcWEuY29tIiwicGFzc3dvcmQiOiJ0ZXN0ZTEyMyIsImlhdCI6MTc4MTE5NzcwNSwiZXhwIjoxNzgxMTk4MzA1fQ.J2i6iCi9bP2wRyL74EsxVXmoZTMIGEzihUTquZYysZE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"produtos\": [\r\n        {\r\n            \"idProduto\": \"K6leHdftCeOJj8BJ\",\r\n            \"quantidade\": 60000\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{urlBase}}/carrinhos",
+              "host": [
+                "{{urlBase}}"
+              ],
+              "path": [
+                "carrinhos"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "urlBase",
+      "value": ""
+    }
+  ]
+}
