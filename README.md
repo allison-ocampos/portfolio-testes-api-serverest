@@ -13,4 +13,4 @@ Este projeto faz parte do meu portfólio de QA Manual. Ele contém a especifica�
 
 ## 🚀 Como Executar os Testes
 1. Abra o arquivo `casos_de_teste.md` para visualizar o roteiro passo a passo.
-2. (Opcional) Importe o arquivo `collection.json` no seu Postman para visualizar as requisições prontas.
+2. (Opcional) Importe o arquivo `serverest-collection.json` no seu Postman para visualizar as requisições prontas.
